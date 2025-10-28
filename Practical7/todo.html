@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Interactive To-Do List</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+max-width: 400px;
+margin: 50px auto;
+}
+input[type="text"] {
+width: 70%;
+padding: 10px;
+box-sizing: border-box;
+}
+button {
+padding: 10px;
+margin-left: 5px;
+}
+ul {
+list-style-type: none;
+padding-left: 0;
+}
+li {
+padding: 10px;
+background-color: #ecf0f1;
+margin-bottom: 5px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+cursor: pointer;
+}
+li.completed {
+text-decoration: line-through;
+background-color: #bdc3c7;
+}
+.remove-btn {
+background-color: #e74c3c;
+border: none;
+color: white;
+padding: 5px 8px;
+cursor: pointer;
+}
+</style>
+</head>
+<body>
+<h2>To-Do List</h2>
+<input type="text" id="taskInput" placeholder="Enter a new
+task">
+
+<button id="addTaskBtn">Add Task</button>
+<ul id="taskList"></ul>
+<script>
+const addTaskBtn =
+document.getElementById("addTaskBtn");
+const taskInput = document.getElementById("taskInput");
+const taskList = document.getElementById("taskList");
+addTaskBtn.addEventListener("click", function(){
+const taskText = taskInput.value.trim();
+if(taskText !== ""){
+const li = document.createElement("li");
+li.textContent = taskText;
+const removeBtn =
+document.createElement("button");
+removeBtn.textContent = "Remove";
+removeBtn.classList.add("remove-btn");
+li.appendChild(removeBtn);
+taskList.appendChild(li);
+taskInput.value = "";
+}
+});
+// Event delegation for removing and completing tasks
+taskList.addEventListener("click", function(event){
+const target = event.target;
+if(target.classList.contains("remove-btn")){
+const li = target.parentElement;
+taskList.removeChild(li);
+} else {
+target.classList.toggle("completed");
+}
+});
+</script>
+</body>
+</html>

@@ -29,7 +29,6 @@ public class LoginServlet extends HttpServlet {
             // Load MySQL JDBC Driver
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Use try-with-resources to avoid leaks
             try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
                  PreparedStatement ps = conn.prepareStatement(
                          "SELECT * FROM users WHERE username = ? AND password = ?")) {
